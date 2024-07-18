@@ -1,0 +1,18 @@
+version: "3.8"
+
+networks:
+  monitoring:
+    name: monitoring
+    external: true
+
+services:
+  dummy-loki:
+    image: grafana/loki
+    container_name: dummy-loki
+    command:
+      - --config.file=/etc/loki/local-config.yaml
+      - --print-config-stderr=true
+    ports:
+      - "3100:3100"
+    networks:
+      - monitoring
